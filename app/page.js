@@ -121,7 +121,7 @@ const HomePage = () => {
 
                 <div style={{ marginBottom: '2.5rem' }}>
                     <label htmlFor="junre" style={{ display: 'block', marginBottom: '0.5rem' }}>
-                        ジャンル
+                        ジャンル<span style={{fontSize: '1.0rem'}}>（追加してほしいジャンルは備考欄へ）</span>
                     </label>
                     <select id="junre" name="junre" style={ inputStyle }>
                         <option value="">選択してください</option>
