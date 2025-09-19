@@ -70,9 +70,38 @@ export async function POST(request) {
       };
     }
 
+    const children = [
+        {
+            object: 'block',
+            type: 'embed',
+            embed: {
+            url: url,
+            },
+        },
+        {
+            object: 'block',
+            type: 'callout',
+            callout: {
+            rich_text: [
+                {
+                type: 'text',
+                text: {
+                    content: description || '（説明なし）',
+                },
+                },
+            ],
+            icon: {
+                type: 'emoji',
+                emoji: '💡',
+            },
+            },
+        },
+    ];
+
     const response = await notion.pages.create({
       parent: { database_id: databaseId },
       properties: properties,
+      children: children,
     });
 
     return NextResponse.json({ success: true, pageId: response.id });

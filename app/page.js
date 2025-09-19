@@ -6,6 +6,7 @@ const HomePage = () => {
     const [user, setUser] = useState('');
     const [message, setMessage] = useState('');
     const [messageColor, setMessageColor] = useState('black');
+    const [showLink, setShowNotionLink] = useState(false);
     const [constant, setConstant] = useState('0.0');
     const [intPart, setIntPart] = useState('');
     const [decimalPart, setDecimalPart] = useState('');
@@ -64,6 +65,7 @@ const HomePage = () => {
             if (response.ok) {
                 setMessage('送信完了');
                 setMessageColor('green');
+                setShowNotionLink(true);
                 form.reset();
                 setIntPart('');
                 setDecimalPart('');
@@ -218,6 +220,23 @@ const HomePage = () => {
             >
                 入力をすべてクリア
             </button>
+
+            {showLink && (
+                <div style={{ marginTop: '1.0rem' }}>
+                    <a
+                    href="https://www.notion.so/2714b8ff2dd18098aaacdd09bb6fdafc?v=2714b8ff2dd18005b721000c2c9ea72b"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                        color: '#2196F3',
+                        textDecoration: 'underline',
+                        fontSize: '1rem',
+                    }}
+                    >
+                    Notionを開いてリクエストを確認
+                    </a>
+                </div>
+            )}
 
         </div>
     );
