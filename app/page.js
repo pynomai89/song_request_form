@@ -3,13 +3,12 @@
 import { useEffect, useState } from 'react';
 
 const HomePage = () => {
-    // ユーザー名とメッセージの状態を管理
     const [user, setUser] = useState('');
     const [message, setMessage] = useState('');
     const [messageColor, setMessageColor] = useState('black');
 
     useEffect(() => {
-        // コンポーネントがマウントされたときにローカルストレージからユーザー名を取得
+        // ユーザー名を取得
         const storedUser = localStorage.getItem('notion_user');
         if (storedUser) {
             setUser(storedUser);
@@ -29,7 +28,7 @@ const HomePage = () => {
         setMessageColor('blue');
 
         try {
-            const response = await fetch('/api/notion', {
+            const response = await fetch('/api/notion/route.js', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
