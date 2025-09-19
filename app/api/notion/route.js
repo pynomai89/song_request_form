@@ -57,27 +57,6 @@ export async function POST(request) {
         },
     };
 
-    if (junre) {
-        // junreが空なら "未分類" を設定
-        properties.junre = {
-        select: { name: junre && junre.trim() !== '' ? junre : '未分類' },
-        };
-    }
-
-    if (constant) {
-        let constantValue = -1;  // -1 は譜面定数未定義状態
-        if (intPart && decimalPart) {
-            constantValue = parseFloat(intPart) + parseFloat(decimalPart) / 10;
-        }
-        else if (intPart) {
-            constantValue = parseFloat(intPart);
-        }
-
-        properties.constant = {
-            number: constantValue,
-        };
-    }
-
     const children = [
         {
             object: 'block',
@@ -105,6 +84,37 @@ export async function POST(request) {
             },
         },
     ];
+
+
+    if (junre) {
+        // junreが空なら "未分類" を設定
+        properties.junre = {
+        select: { name: junre && junre.trim() !== '' ? junre : '未分類' },
+        };
+    }
+
+    if (constant) {
+        let constantValue = -1;  // -1 は譜面定数未定義状態
+        if (intPart && decimalPart) {
+            constantValue = parseFloat(intPart) + parseFloat(decimalPart) / 10;
+            children.push({
+                object: 'block', type: 'paragraph',
+                paragraph: { rich_text: [{ type: 'text', text: { content: `譜面定数: ${constantValue.toFixed(1)}` } }] }
+            });
+        }
+        else if (intPart) {
+            constantValue = parseInt(intPart);
+            children.push({
+                object: 'block', type: 'paragraph',
+                paragraph: { rich_text: [{ type: 'text', text: { content: `難易度: ${constantValue}` } }] }
+            });
+        }
+
+        properties.constant = {
+            number: constantValue,
+        };
+    }
+
 
     const response = await notion.pages.create({
       parent: { database_id: databaseId },

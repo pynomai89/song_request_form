@@ -107,8 +107,8 @@ const HomePage = () => {
                         type="text" 
                         id="user" 
                         name="user" 
+                        value={user} 
                         required 
-                        value={user}
                         onChange={(e) => setUser(e.target.value)}
                         style={ inputStyle } 
                     />
@@ -140,7 +140,6 @@ const HomePage = () => {
                             name="intPart"
                             value={intPart}
                             onChange={handleIntChange}
-                            required
                             style={{
                                 width: '100%',
                                 padding: '0.5rem',
@@ -167,7 +166,6 @@ const HomePage = () => {
                             name="decimalPart"
                             value={decimalPart}
                             onChange={handleDecimalChange}
-                            required
                             style={{
                                 width: '100%',
                                 padding: '0.5rem',
