@@ -3,7 +3,7 @@ import { Client } from '@notionhq/client';
 
 export async function POST(request) {
   const body = await request.json();
-  const { song, url, user, constant, description } = body;
+  const { song, url, user, constant, description, junre } = body;
 
   if (!song || !url || !user) {
     return NextResponse.json(
@@ -56,6 +56,13 @@ export async function POST(request) {
             ],
         },
     };
+
+    if (junre) {
+        // junreが空なら "未分類" を設定
+        properties.junre = {
+        select: { name: junre && junre.trim() !== '' ? junre : '未分類' },
+        };
+    }
 
     if (constant) {
       properties.constant = {
