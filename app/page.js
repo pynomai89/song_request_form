@@ -131,7 +131,7 @@ const HomePage = () => {
                     </select>
                     </div>
 
-                <div style={{ marginBottom: '2.5rem' }}>
+                <div style={{ marginBottom: '2.0rem' }}>
                     <label htmlFor="constant" style={{ display: 'block', marginBottom: '0.5rem' }}>譜面定数（要望でも可）</label>
                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                         <div style={{ flex: '1' }}>
@@ -183,6 +183,7 @@ const HomePage = () => {
                             </select>
                         </div>
                     </div>
+                    <h1 style={{ fontSize: '1.0rem', marginTop: '0.7rem', color: 'gray' }}>※難易度のみ送信する場合は、定数値は未選択のまま送信してください</h1>
                 </div>
 
                 <div style={{ marginBottom: '2.5rem' }}>
