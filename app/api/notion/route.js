@@ -3,7 +3,7 @@ import { Client } from '@notionhq/client';
 
 export async function POST(request) {
   const body = await request.json();
-  const { song, url, user, constant, description, junre } = body;
+  const { song, url, user, constant, intPart, decimalPart, description, junre } = body;
 
   if (!song || !url || !user) {
     return NextResponse.json(
@@ -65,9 +65,17 @@ export async function POST(request) {
     }
 
     if (constant) {
-      properties.constant = {
-        number: parseFloat(constant),
-      };
+        let constantValue = -1;  // -1 は譜面定数未定義状態
+        if (intPart && decimalPart) {
+            constantValue = parseFloat(intPart) + parseFloat(decimalPart) / 10;
+        }
+        else if (intPart) {
+            constantValue = parseFloat(intPart);
+        }
+
+        properties.constant = {
+            number: constantValue,
+        };
     }
 
     const children = [

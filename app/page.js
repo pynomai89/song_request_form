@@ -7,7 +7,6 @@ const HomePage = () => {
     const [message, setMessage] = useState('');
     const [messageColor, setMessageColor] = useState('black');
     const [showLink, setShowNotionLink] = useState(false);
-    const [constant, setConstant] = useState('0.0');
     const [intPart, setIntPart] = useState('');
     const [decimalPart, setDecimalPart] = useState('');
 
@@ -24,10 +23,6 @@ const HomePage = () => {
     { /*譜面定数処理*/ }
     const handleIntChange = (e) => setIntPart(e.target.value);
     const handleDecimalChange = (e) => setDecimalPart(e.target.value);
-    const constantValue =
-        intPart !== '' && decimalPart !== ''
-            ? Number(intPart) + Number(decimalPart) / 10
-            : '';
 
     { /*ユーザー名を取得*/ }
     useEffect(() => {
@@ -44,7 +39,8 @@ const HomePage = () => {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        setConstant(constantValue);
+        if (intPart) { data.constant = true; } else { data.constant = false; }
+        if (!decimalPart) { data.decimalPart = 0; }
 
         localStorage.setItem('notion_user', data.user);
 
@@ -69,7 +65,6 @@ const HomePage = () => {
                 form.reset();
                 setIntPart('');
                 setDecimalPart('');
-                setConstant('0.0');
                 const storedUserAfterReset = localStorage.getItem('notion_user');
                 setUser(storedUserAfterReset || '');
             } else {
@@ -158,8 +153,8 @@ const HomePage = () => {
                             >
                             <option value="">難易度</option>
                             <option value="0">0</option>
-                            <option value="13">11</option>
-                            <option value="13">12</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
                             <option value="13">13</option>
                             <option value="14">14</option>
                             <option value="15">15</option>
@@ -211,7 +206,6 @@ const HomePage = () => {
                     form.reset();
                     setIntPart('');
                     setDecimalPart('');
-                    setConstant('0.0');
                     setMessage('入力内容をクリアしました');
                     setMessageColor('gray');
                 }}
