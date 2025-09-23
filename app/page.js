@@ -217,7 +217,7 @@ const HomePage = () => {
             {showLink && (
                 <div style={{ marginTop: '1.0rem' }}>
                     <a
-                    href="https://www.notion.so/2714b8ff2dd18098aaacdd09bb6fdafc?v=2714b8ff2dd18005b721000c2c9ea72b"
+                    href="https://otogeki-dev.notion.site/2714b8ff2dd18098aaacdd09bb6fdafc?v=2714b8ff2dd18005b721000c2c9ea72b&source=copy_link"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
@@ -226,7 +226,7 @@ const HomePage = () => {
                         fontSize: '1rem',
                     }}
                     >
-                    Notionを開いてリクエストを確認
+                    送信したリクエストを確認
                     </a>
                 </div>
             )}
